@@ -1,0 +1,1291 @@
+**************************  1. cti NORMAL RUN **************************
+
+A - timeout: 1479257951.970
+B - New entry: E ( cost: 2 via neighbor: A)
+E - New entry: B ( cost: 2 via neighbor: A)
+A - New entry: C ( cost: 2 via neighbor: B)
+C - New entry: A ( cost: 2 via neighbor: B)
+C - New entry: E ( cost: 3 via neighbor: B)
+D - New entry: A ( cost: 2 via neighbor: E)
+E - timeout: 1479257951.971B - timeout: 1479257951.971
+
+D - New entry: B ( cost: 3 via neighbor: E)
+A - New entry: D ( cost: 2 via neighbor: E)
+E - New entry: C ( cost: 3 via neighbor: A)
+B - New entry: D ( cost: 2 via neighbor: C)
+C - New entry: E ( cost: 2 via neighbor: D)
+E - New entry: C ( cost: 2 via neighbor: D)
+D - New entry: B ( cost: 2 via neighbor: C)
+C - timeout: 1479257951.975
+D - timeout: 1479257951.975
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 1	 B
+ C	 2	 B
+ D	 2	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 2	 B
+ B	 1	 B
+ C	 0	 C
+ D	 1	 D
+ E	 2	 D
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 0	 B
+ C	 1	 C
+ D	 2	 C
+ E	 2	 A
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 2	 A
+ C	 2	 D
+ D	 1	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 2	 E
+ B	 2	 C
+ C	 1	 C
+ D	 0	 D
+ E	 1	 E
+***********************
+
+************************************************************************
+
+
+************************** 2. test1 NORMAL RUN ***************************
+
+A - timeout: 1479258168.952
+A - New entry: C ( cost: 8 via neighbor: B)
+C - New entry: A ( cost: 8 via neighbor: B)
+C - New entry: E ( cost: 9 via neighbor: B)
+B - timeout: 1479258168.952D - timeout: 1479258168.952
+
+E - New entry: C ( cost: 9 via neighbor: B)
+C - New entry: E ( cost: 4 via neighbor: D)D - New entry: A ( cost: 10 via neighbor: C)
+
+D - New entry: B ( cost: 3 via neighbor: C)
+A - New entry: D ( cost: 3 via neighbor: E)
+B - New entry: D ( cost: 3 via neighbor: C)
+E - New entry: C ( cost: 4 via neighbor: D)
+D - New entry: A ( cost: 3 via neighbor: E)
+A - New entry: C ( cost: 5 via neighbor: E)
+C - New entry: A ( cost: 5 via neighbor: D)
+B - New entry: E ( cost: 5 via neighbor: C)
+E - New entry: B ( cost: 5 via neighbor: D)
+A - New entry: B ( cost: 6 via neighbor: E)
+B - New entry: A ( cost: 6 via neighbor: C)
+C - timeout: 1479258168.955
+E - timeout: 1479258168.955
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 6	 E
+ C	 5	 E
+ D	 3	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 5	 D
+ B	 1	 B
+ C	 0	 C
+ D	 2	 D
+ E	 4	 D
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 6	 C
+ B	 0	 B
+ C	 1	 C
+ D	 3	 C
+ E	 5	 C
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 5	 D
+ C	 4	 D
+ D	 2	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 3	 C
+ C	 2	 C
+ D	 0	 D
+ E	 2	 E
+***********************
+
+
+B - timeout: 1479258178.957
+C - timeout: 1479258178.957
+A - timeout: 1479258178.957
+D - timeout: 1479258178.958
+E - timeout: 1479258178.958
+
+****************************************************************************
+
+*****************************3. test2 NORMAL RUN***************************
+
+A - timeout: 1479259221.431
+H - New entry: D ( cost: 15 via neighbor: G)
+H - New entry: F ( cost: 20 via neighbor: G)
+A - New entry: E ( cost: 7 via neighbor: C)
+A - New entry: D ( cost: 5 via neighbor: C)
+G - timeout: 1479259221.432
+C - timeout: 1479259221.432
+F - timeout: 1479259221.432
+E - timeout: 1479259221.432
+F - New entry: B ( cost: 10 via neighbor: G)
+G - New entry: E ( cost: 7 via neighbor: F)
+C - New entry: F ( cost: 4 via neighbor: E)
+F - New entry: H ( cost: 20 via neighbor: G)
+E - New entry: A ( cost: 7 via neighbor: C)
+B - timeout: 1479259221.432
+D - timeout: 1479259221.432
+E - New entry: B ( cost: 5 via neighbor: C)
+H - timeout: 1479259221.432
+A - New entry: C ( cost: 3 via neighbor: B)
+A - New entry: E ( cost: 64 via neighbor: None)
+A - New entry: D ( cost: 10 via neighbor: B)
+A - New entry: G ( cost: 5 via neighbor: B)
+H - New entry: A ( cost: 3 via neighbor: B)
+A - New entry: H ( cost: 3 via neighbor: B)
+H - New entry: C ( cost: 4 via neighbor: B)
+B - New entry: D ( cost: 5 via neighbor: G)
+D - New entry: B ( cost: 5 via neighbor: G)
+H - New entry: D ( cost: 11 via neighbor: B)
+B - New entry: F ( cost: 10 via neighbor: G)
+H - New entry: G ( cost: 6 via neighbor: B)
+H - New entry: F ( cost: 64 via neighbor: None)
+D - New entry: H ( cost: 15 via neighbor: G)
+F - New entry: C ( cost: 4 via neighbor: E)
+F - New entry: D ( cost: 2 via neighbor: E)
+E - New entry: G ( cost: 7 via neighbor: F)
+C - New entry: E ( cost: 2 via neighbor: D)
+A - New entry: D ( cost: 6 via neighbor: B)
+A - New entry: F ( cost: 11 via neighbor: B)
+C - New entry: G ( cost: 2 via neighbor: D)
+C - New entry: F ( cost: 4 via neighbor: D)
+H - New entry: D ( cost: 7 via neighbor: B)
+H - New entry: F ( cost: 12 via neighbor: B)
+G - New entry: A ( cost: 5 via neighbor: B)
+G - New entry: C ( cost: 6 via neighbor: B)
+B - New entry: E ( cost: 5 via neighbor: C)
+F - New entry: B ( cost: 12 via neighbor: D)
+D - New entry: A ( cost: 5 via neighbor: C)
+B - New entry: D ( cost: 3 via neighbor: C)
+G - New entry: H ( cost: 6 via neighbor: B)
+F - New entry: G ( cost: 4 via neighbor: D)
+D - New entry: B ( cost: 3 via neighbor: C)
+F - New entry: H ( cost: 64 via neighbor: None)
+E - New entry: A ( cost: 64 via neighbor: None)
+E - New entry: C ( cost: 2 via neighbor: D)
+E - New entry: B ( cost: 10 via neighbor: D)
+E - New entry: G ( cost: 2 via neighbor: D)
+A - New entry: E ( cost: 6 via neighbor: B)
+C - New entry: A ( cost: 3 via neighbor: B)
+A - New entry: D ( cost: 4 via neighbor: B)
+H - New entry: E ( cost: 7 via neighbor: B)
+F - New entry: A ( cost: 8 via neighbor: E)
+H - New entry: D ( cost: 5 via neighbor: B)
+C - New entry: H ( cost: 4 via neighbor: B)
+F - New entry: B ( cost: 6 via neighbor: E)
+G - New entry: C ( cost: 2 via neighbor: D)
+F - New entry: G ( cost: 6 via neighbor: G)
+F - New entry: H ( cost: 20 via neighbor: G)
+G - New entry: E ( cost: 2 via neighbor: D)
+E - New entry: A ( cost: 7 via neighbor: C)
+G - New entry: F ( cost: 4 via neighbor: D)
+E - New entry: H ( cost: 21 via neighbor: F)
+D - New entry: F ( cost: 2 via neighbor: E)
+E - New entry: A ( cost: 64 via neighbor: None)
+F - New entry: G ( cost: 4 via neighbor: D)
+B - New entry: F ( cost: 6 via neighbor: C)
+F - New entry: H ( cost: 18 via neighbor: D)
+E - New entry: B ( cost: 6 via neighbor: D)
+E - New entry: H ( cost: 16 via neighbor: D)
+A - New entry: F ( cost: 7 via neighbor: B)
+H - New entry: F ( cost: 8 via neighbor: B)
+F - New entry: G ( cost: 6 via neighbor: G)
+F - New entry: H ( cost: 20 via neighbor: G)
+E - New entry: A ( cost: 7 via neighbor: C)
+F - New entry: H ( cost: 12 via neighbor: G)
+E - New entry: A ( cost: 6 via neighbor: D)
+E - New entry: B ( cost: 4 via neighbor: D)
+B - New entry: E ( cost: 4 via neighbor: C)
+F - New entry: A ( cost: 64 via neighbor: None)
+F - New entry: C ( cost: 3 via neighbor: E)
+F - New entry: B ( cost: 11 via neighbor: E)
+C - New entry: F ( cost: 3 via neighbor: D)
+F - New entry: G ( cost: 3 via neighbor: E)
+F - New entry: H ( cost: 64 via neighbor: None)
+A - New entry: E ( cost: 5 via neighbor: B)
+G - New entry: F ( cost: 3 via neighbor: D)
+H - New entry: E ( cost: 6 via neighbor: B)
+F - New entry: A ( cost: 8 via neighbor: E)
+E - New entry: H ( cost: 13 via neighbor: F)
+F - New entry: H ( cost: 22 via neighbor: E)
+D - New entry: H ( cost: 7 via neighbor: G)
+E - New entry: H ( cost: 16 via neighbor: D)
+F - New entry: A ( cost: 64 via neighbor: None)
+E - New entry: H ( cost: 8 via neighbor: D)
+F - New entry: B ( cost: 7 via neighbor: E)
+F - New entry: H ( cost: 17 via neighbor: E)
+D - New entry: A ( cost: 4 via neighbor: C)
+B - New entry: F ( cost: 5 via neighbor: C)
+D - New entry: H ( cost: 5 via neighbor: C)
+F - New entry: A ( cost: 8 via neighbor: E)
+A - New entry: F ( cost: 6 via neighbor: B)
+F - New entry: A ( cost: 7 via neighbor: E)
+H - New entry: F ( cost: 7 via neighbor: B)
+F - New entry: B ( cost: 5 via neighbor: E)
+E - New entry: A ( cost: 5 via neighbor: D)
+E - New entry: H ( cost: 6 via neighbor: D)
+F - New entry: H ( cost: 14 via neighbor: E)
+F - New entry: H ( cost: 17 via neighbor: E)
+F - New entry: H ( cost: 9 via neighbor: E)
+F - New entry: A ( cost: 6 via neighbor: E)
+F - New entry: H ( cost: 7 via neighbor: E)
+B - timeout: 1479259231.441
+A - timeout: 1479259231.441
+H - timeout: 1479259231.441
+C - timeout: 1479259231.441
+G - timeout: 1479259231.441
+D - timeout: 1479259231.442
+F - timeout: 1479259231.442E - timeout: 1479259231.442
+
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 1	 B
+ C	 3	 B
+ D	 4	 B
+ E	 5	 B
+ F	 6	 B
+ G	 5	 B
+ H	 3	 B
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 B
+ B	 2	 B
+ C	 0	 C
+ D	 1	 D
+ E	 2	 D
+ F	 3	 D
+ G	 2	 D
+ H	 4	 B
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 0	 B
+ C	 2	 C
+ D	 3	 C
+ E	 4	 C
+ F	 5	 C
+ G	 4	 G
+ H	 2	 H
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 5	 D
+ B	 4	 D
+ C	 2	 D
+ D	 1	 D
+ E	 0	 E
+ F	 1	 F
+ G	 2	 D
+ H	 6	 D
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 4	 C
+ B	 3	 C
+ C	 1	 C
+ D	 0	 D
+ E	 1	 E
+ F	 2	 E
+ G	 1	 G
+ H	 5	 C
+***********************
+
+
+
+
+******G's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 5	 B
+ B	 4	 B
+ C	 2	 D
+ D	 1	 D
+ E	 2	 D
+ F	 3	 D
+ G	 0	 G
+ H	 6	 B
+***********************
+
+
+
+
+******F's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 6	 E
+ B	 5	 E
+ C	 3	 E
+ D	 2	 E
+ E	 1	 E
+ F	 0	 F
+ G	 3	 E
+ H	 7	 E
+***********************
+
+
+
+
+******H's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 B
+ B	 2	 B
+ C	 4	 B
+ D	 5	 B
+ E	 6	 B
+ F	 7	 B
+ G	 6	 B
+ H	 0	 H
+***********************
+
+
+A - timeout: 1479259241.443
+H - timeout: 1479259241.443
+G - timeout: 1479259241.443
+C - timeout: 1479259241.443
+D - timeout: 1479259241.444
+B - timeout: 1479259241.444
+F - timeout: 1479259241.445
+E - timeout: 1479259241.445
+
+
+
+****************************************
+
+*************4. test1 with changelink**************************
+
+C - timeout: 1479258842.914
+B - New entry: D ( cost: 3 via neighbor: C)
+D - New entry: B ( cost: 3 via neighbor: C)
+A - timeout: 1479258842.914
+C - New entry: E ( cost: 4 via neighbor: D)
+A - New entry: D ( cost: 3 via neighbor: E)
+E - timeout: 1479258842.914
+D - New entry: A ( cost: 3 via neighbor: E)
+C - New entry: A ( cost: 8 via neighbor: B)
+B - New entry: E ( cost: 5 via neighbor: C)
+A - New entry: C ( cost: 8 via neighbor: B)
+E - New entry: C ( cost: 4 via neighbor: D)
+C - New entry: A ( cost: 5 via neighbor: D)
+E - New entry: B ( cost: 5 via neighbor: D)
+A - New entry: C ( cost: 5 via neighbor: E)
+A - New entry: B ( cost: 6 via neighbor: E)
+B - New entry: A ( cost: 6 via neighbor: C)
+B - timeout: 1479258842.918
+D - timeout: 1479258842.918
+B - New entry: A ( cost: 3 via neighbor: E)
+B - New entry: E ( cost: 2 via neighbor: E)
+E - New entry: C ( cost: 3 via neighbor: B)
+E - New entry: B ( cost: 2 via neighbor: B)
+C - New entry: A ( cost: 4 via neighbor: B)
+C - New entry: E ( cost: 3 via neighbor: B)
+A - New entry: C ( cost: 4 via neighbor: E)
+A - New entry: B ( cost: 3 via neighbor: E)
+A - timeout: 1479258852.917C - timeout: 1479258852.917
+
+E - timeout: 1479258852.917
+B - timeout: 1479258852.919
+D - timeout: 1479258852.919
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 3	 E
+ C	 4	 E
+ D	 3	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 4	 B
+ B	 1	 B
+ C	 0	 C
+ D	 2	 D
+ E	 3	 B
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 0	 B
+ C	 1	 C
+ D	 3	 C
+ E	 2	 E
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 2	 B
+ C	 3	 B
+ D	 2	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 3	 C
+ C	 2	 C
+ D	 0	 D
+ E	 2	 E
+***********************
+
+
+C - timeout: 1479258862.922
+E - timeout: 1479258862.922
+A - timeout: 1479258862.922
+B - timeout: 1479258862.923
+D - timeout: 1479258862.923
+B - New entry: A ( cost: 5 via neighbor: C)
+B - New entry: E ( cost: 4 via neighbor: C)
+E - New entry: C ( cost: 4 via neighbor: D)
+E - New entry: B ( cost: 4 via neighbor: A)
+C - New entry: A ( cost: 5 via neighbor: D)
+C - New entry: E ( cost: 4 via neighbor: D)
+A - New entry: C ( cost: 5 via neighbor: E)
+A - New entry: B ( cost: 5 via neighbor: E)
+B - New entry: A ( cost: 6 via neighbor: C)
+B - New entry: E ( cost: 5 via neighbor: C)
+E - New entry: B ( cost: 5 via neighbor: D)
+A - New entry: B ( cost: 6 via neighbor: E)
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 6	 E
+ C	 5	 E
+ D	 3	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 5	 D
+ B	 1	 B
+ C	 0	 C
+ D	 2	 D
+ E	 4	 D
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 6	 C
+ B	 0	 B
+ C	 1	 C
+ D	 3	 C
+ E	 5	 C
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 5	 D
+ C	 4	 D
+ D	 2	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 3	 C
+ C	 2	 C
+ D	 0	 D
+ E	 2	 E
+***********************
+
+*************************************************
+
+*************4. test1 with poisonReverse and changelink**************************
+
+A - New entry: C ( cost: 8 via neighbor: B)
+C - New entry: A ( cost: 8 via neighbor: B)
+C - New entry: E ( cost: 9 via neighbor: B)
+B - timeout: 1479259496.063
+E - New entry: C ( cost: 9 via neighbor: B)
+B - New entry: D ( cost: 3 via neighbor: C)
+A - timeout: 1479259496.063
+D - New entry: A ( cost: 10 via neighbor: C)
+A - New entry: D ( cost: 10 via neighbor: B)
+D - New entry: B ( cost: 3 via neighbor: C)
+A - New entry: D ( cost: 3 via neighbor: E)
+C - New entry: E ( cost: 4 via neighbor: D)
+D - New entry: A ( cost: 3 via neighbor: E)
+B - New entry: E ( cost: 5 via neighbor: C)
+E - timeout: 1479259496.064
+C - New entry: A ( cost: 5 via neighbor: D)
+B - New entry: A ( cost: 6 via neighbor: C)
+E - New entry: C ( cost: 4 via neighbor: D)
+E - New entry: B ( cost: 5 via neighbor: D)
+A - New entry: C ( cost: 5 via neighbor: E)
+A - New entry: B ( cost: 6 via neighbor: E)
+D - timeout: 1479259496.071
+C - timeout: 1479259496.072
+A - timeout: 1479259506.071
+B - timeout: 1479259506.071
+E - timeout: 1479259506.072
+C - timeout: 1479259506.073
+D - timeout: 1479259506.073
+B - New entry: A ( cost: 3 via neighbor: E)
+B - New entry: E ( cost: 2 via neighbor: E)
+E - New entry: C ( cost: 3 via neighbor: B)
+E - New entry: B ( cost: 2 via neighbor: B)
+C - New entry: A ( cost: 4 via neighbor: B)
+C - New entry: E ( cost: 3 via neighbor: B)
+A - New entry: C ( cost: 4 via neighbor: E)
+A - New entry: B ( cost: 3 via neighbor: E)
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 3	 E
+ C	 4	 E
+ D	 3	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 4	 B
+ B	 1	 B
+ C	 0	 C
+ D	 2	 D
+ E	 3	 B
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 0	 B
+ C	 1	 C
+ D	 3	 C
+ E	 2	 E
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 2	 B
+ C	 3	 B
+ D	 2	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 3	 C
+ C	 2	 C
+ D	 0	 D
+ E	 2	 E
+***********************
+
+
+A - timeout: 1479259516.075
+B - timeout: 1479259516.075
+C - timeout: 1479259516.076
+E - timeout: 1479259516.076
+D - timeout: 1479259516.077
+B - New entry: A ( cost: 9 via neighbor: E)
+B - New entry: E ( cost: 8 via neighbor: E)
+E - New entry: C ( cost: 4 via neighbor: D)
+E - New entry: B ( cost: 5 via neighbor: D)
+C - New entry: A ( cost: 5 via neighbor: D)
+C - New entry: E ( cost: 4 via neighbor: D)
+A - New entry: C ( cost: 5 via neighbor: E)
+A - New entry: B ( cost: 6 via neighbor: E)
+B - New entry: A ( cost: 6 via neighbor: C)
+B - New entry: E ( cost: 5 via neighbor: C)
+
+
+******A's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 0	 A
+ B	 6	 E
+ C	 5	 E
+ D	 3	 E
+ E	 1	 E
+***********************
+
+
+
+
+******C's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 5	 D
+ B	 1	 B
+ C	 0	 C
+ D	 2	 D
+ E	 4	 D
+***********************
+
+
+
+
+******B's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 6	 C
+ B	 0	 B
+ C	 1	 C
+ D	 3	 C
+ E	 5	 C
+***********************
+
+
+
+
+******E's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 1	 A
+ B	 5	 D
+ C	 4	 D
+ D	 2	 D
+ E	 0	 E
+***********************
+
+
+
+
+******D's DISTANCE VECTOR******
+Dest	Cost	Hop
+ A	 3	 E
+ B	 3	 C
+ C	 2	 C
+ D	 0	 D
+ E	 2	 E
+***********************
+
+
+**************************************************
+
+
+*************5. cti with changelink where AE and CD change to 64**************************
+
+C - timeout: 1479262024.144
+B - New entry: D ( cost: 2 via neighbor: C)
+D - New entry: B ( cost: 2 via neighbor: C)
+A - New entry: C ( cost: 2 via neighbor: B)
+C - New entry: E ( cost: 2 via neighbor: D)
+A - New entry: D ( cost: 3 via neighbor: B)
+E - New entry: C ( cost: 2 via neighbor: D)
+E - New entry: B ( cost: 3 via neighbor: D)
+B - New entry: E ( cost: 2 via neighbor: A)
+C - New entry: A ( cost: 2 via neighbor: B)
+A - timeout: 1479262024.145
+D - New entry: A ( cost: 2 via neighbor: E)
+A - New entry: D ( cost: 2 via neighbor: E)
+E - timeout: 1479262024.145
+E - New entry: B ( cost: 2 via neighbor: A)
+D - timeout: 1479262024.155
+B - timeout: 1479262024.156
+C - timeout: 1479262034.152
+A - timeout: 1479262034.153
+E - timeout: 1479262034.153
+B - timeout: 1479262034.156
+D - timeout: 1479262034.156
+A - New entry: E ( cost: 3 via neighbor: B)
+A - New entry: D ( cost: 3 via neighbor: B)
+E - New entry: A ( cost: 3 via neighbor: D)
+E - New entry: B ( cost: 3 via neighbor: D)
+B - New entry: E ( cost: 3 via neighbor: C)
+D - New entry: A ( cost: 3 via neighbor: C)
+A - New entry: E ( cost: 4 via neighbor: B)
+E - New entry: A ( cost: 4 via neighbor: D)
+C - timeout: 1479262044.154
+A - timeout: 1479262044.155
+E - timeout: 1479262044.155
+B - timeout: 1479262044.157
+D - timeout: 1479262044.157
+C - New entry: E ( cost: 4 via neighbor: B)
+C - New entry: D ( cost: 3 via neighbor: B)
+D - New entry: A ( cost: 5 via neighbor: E)
+D - New entry: C ( cost: 3 via neighbor: E)
+D - New entry: B ( cost: 4 via neighbor: E)
+B - New entry: E ( cost: 5 via neighbor: A)
+B - New entry: D ( cost: 4 via neighbor: A)
+E - New entry: A ( cost: 6 via neighbor: D)
+E - New entry: C ( cost: 4 via neighbor: D)
+E - New entry: B ( cost: 5 via neighbor: D)
+A - New entry: E ( cost: 6 via neighbor: B)
+A - New entry: D ( cost: 5 via neighbor: B)
+C - New entry: E ( cost: 6 via neighbor: B)
+C - New entry: D ( cost: 5 via neighbor: B)
+D - New entry: A ( cost: 7 via neighbor: E)
+D - New entry: C ( cost: 5 via neighbor: E)
+D - New entry: B ( cost: 6 via neighbor: E)
+B - New entry: E ( cost: 5 via neighbor: C)
+B - New entry: D ( cost: 4 via neighbor: C)
+E - New entry: A ( cost: 8 via neighbor: D)
+E - New entry: C ( cost: 6 via neighbor: D)
+E - New entry: B ( cost: 7 via neighbor: D)
+B - New entry: E ( cost: 7 via neighbor: A)
+B - New entry: D ( cost: 6 via neighbor: A)
+D - New entry: A ( cost: 9 via neighbor: E)
+D - New entry: C ( cost: 7 via neighbor: E)
+D - New entry: B ( cost: 8 via neighbor: E)
+A - New entry: E ( cost: 8 via neighbor: B)
+A - New entry: D ( cost: 7 via neighbor: B)
+C - New entry: E ( cost: 8 via neighbor: B)
+C - New entry: D ( cost: 7 via neighbor: B)
+E - New entry: A ( cost: 10 via neighbor: D)
+E - New entry: C ( cost: 8 via neighbor: D)
+E - New entry: B ( cost: 9 via neighbor: D)
+B - New entry: E ( cost: 7 via neighbor: C)
+B - New entry: D ( cost: 6 via neighbor: C)
+D - New entry: A ( cost: 11 via neighbor: E)
+D - New entry: C ( cost: 9 via neighbor: E)
+D - New entry: B ( cost: 10 via neighbor: E)
+B - New entry: E ( cost: 9 via neighbor: A)
+B - New entry: D ( cost: 8 via neighbor: A)
+E - New entry: A ( cost: 12 via neighbor: D)
+A - New entry: E ( cost: 10 via neighbor: B)
+E - New entry: C ( cost: 10 via neighbor: D)
+A - New entry: D ( cost: 9 via neighbor: B)
+E - New entry: B ( cost: 11 via neighbor: D)
+C - New entry: E ( cost: 10 via neighbor: B)
+C - New entry: D ( cost: 9 via neighbor: B)
+D - New entry: A ( cost: 13 via neighbor: E)
+D - New entry: C ( cost: 11 via neighbor: E)
+B - New entry: E ( cost: 9 via neighbor: C)
+D - New entry: B ( cost: 12 via neighbor: E)B - New entry: D ( cost: 8 via neighbor: C)
+
+E - New entry: A ( cost: 14 via neighbor: D)
+E - New entry: C ( cost: 12 via neighbor: D)B - New entry: E ( cost: 11 via neighbor: A)
+
+B - New entry: D ( cost: 10 via neighbor: A)
+E - New entry: B ( cost: 13 via neighbor: D)
+A - New entry: E ( cost: 12 via neighbor: B)
+A - New entry: D ( cost: 11 via neighbor: B)
+C - New entry: E ( cost: 12 via neighbor: B)D - New entry: A ( cost: 15 via neighbor: E)
+
+C - New entry: D ( cost: 11 via neighbor: B)D - New entry: C ( cost: 13 via neighbor: E)
+
+D - New entry: B ( cost: 14 via neighbor: E)
+B - New entry: E ( cost: 11 via neighbor: C)
+B - New entry: D ( cost: 10 via neighbor: C)
+E - New entry: A ( cost: 16 via neighbor: D)
+E - New entry: C ( cost: 14 via neighbor: D)
+E - New entry: B ( cost: 15 via neighbor: D)
+B - New entry: E ( cost: 13 via neighbor: A)
+B - New entry: D ( cost: 12 via neighbor: A)
+D - New entry: A ( cost: 17 via neighbor: E)
+D - New entry: C ( cost: 15 via neighbor: E)
+D - New entry: B ( cost: 16 via neighbor: E)
+A - New entry: E ( cost: 14 via neighbor: B)
+A - New entry: D ( cost: 13 via neighbor: B)
+C - New entry: E ( cost: 14 via neighbor: B)
+C - New entry: D ( cost: 13 via neighbor: B)
+E - New entry: A ( cost: 18 via neighbor: D)
+E - New entry: C ( cost: 16 via neighbor: D)
+E - New entry: B ( cost: 17 via neighbor: D)
+B - New entry: E ( cost: 13 via neighbor: C)
+B - New entry: D ( cost: 12 via neighbor: C)
+D - New entry: A ( cost: 19 via neighbor: E)
+D - New entry: C ( cost: 17 via neighbor: E)
+D - New entry: B ( cost: 18 via neighbor: E)
+B - New entry: E ( cost: 15 via neighbor: A)
+B - New entry: D ( cost: 14 via neighbor: A)
+E - New entry: A ( cost: 20 via neighbor: D)
+E - New entry: C ( cost: 18 via neighbor: D)
+E - New entry: B ( cost: 19 via neighbor: D)A - New entry: E ( cost: 16 via neighbor: B)
+
+A - New entry: D ( cost: 15 via neighbor: B)C - New entry: E ( cost: 16 via neighbor: B)
+
+C - New entry: D ( cost: 15 via neighbor: B)
+D - New entry: A ( cost: 21 via neighbor: E)
+D - New entry: C ( cost: 19 via neighbor: E)
+B - New entry: E ( cost: 17 via neighbor: A)
+D - New entry: B ( cost: 20 via neighbor: E)
+B - New entry: D ( cost: 16 via neighbor: A)
+E - New entry: A ( cost: 22 via neighbor: D)
+C - New entry: E ( cost: 18 via neighbor: B)A - New entry: E ( cost: 18 via neighbor: B)
+
+E - New entry: C ( cost: 20 via neighbor: D)
+C - New entry: D ( cost: 17 via neighbor: B)
+A - New entry: D ( cost: 17 via neighbor: B)E - New entry: B ( cost: 21 via neighbor: D)
+
+B - New entry: E ( cost: 19 via neighbor: A)
+B - New entry: D ( cost: 18 via neighbor: A)
+D - New entry: A ( cost: 23 via neighbor: E)
+D - New entry: C ( cost: 21 via neighbor: E)
+D - New entry: B ( cost: 22 via neighbor: E)
+A - New entry: E ( cost: 20 via neighbor: B)
+C - New entry: E ( cost: 20 via neighbor: B)
+A - New entry: D ( cost: 19 via neighbor: B)
+C - New entry: D ( cost: 19 via neighbor: B)
+E - New entry: A ( cost: 24 via neighbor: D)
+E - New entry: C ( cost: 22 via neighbor: D)
+E - New entry: B ( cost: 23 via neighbor: D)
+B - New entry: E ( cost: 21 via neighbor: A)
+B - New entry: D ( cost: 20 via neighbor: A)
+D - New entry: A ( cost: 25 via neighbor: E)
+D - New entry: C ( cost: 23 via neighbor: E)
+D - New entry: B ( cost: 24 via neighbor: E)
+A - New entry: E ( cost: 22 via neighbor: B)
+A - New entry: D ( cost: 21 via neighbor: B)C - New entry: E ( cost: 22 via neighbor: B)
+
+C - New entry: D ( cost: 21 via neighbor: B)
+E - New entry: A ( cost: 26 via neighbor: D)
+E - New entry: C ( cost: 24 via neighbor: D)
+E - New entry: B ( cost: 25 via neighbor: D)
+B - New entry: E ( cost: 23 via neighbor: A)
+B - New entry: D ( cost: 22 via neighbor: A)
+D - New entry: A ( cost: 27 via neighbor: E)
+D - New entry: C ( cost: 25 via neighbor: E)
+D - New entry: B ( cost: 26 via neighbor: E)
+A - New entry: E ( cost: 24 via neighbor: B)
+A - New entry: D ( cost: 23 via neighbor: B)
+C - New entry: E ( cost: 24 via neighbor: B)
+C - New entry: D ( cost: 23 via neighbor: B)
+E - New entry: A ( cost: 28 via neighbor: D)
+E - New entry: C ( cost: 26 via neighbor: D)
+E - New entry: B ( cost: 27 via neighbor: D)
+B - New entry: E ( cost: 25 via neighbor: A)
+B - New entry: D ( cost: 24 via neighbor: A)
+D - New entry: A ( cost: 29 via neighbor: E)
+D - New entry: C ( cost: 27 via neighbor: E)
+D - New entry: B ( cost: 28 via neighbor: E)A - New entry: E ( cost: 26 via neighbor: B)
+
+A - New entry: D ( cost: 25 via neighbor: B)
+C - New entry: E ( cost: 26 via neighbor: B)
+C - New entry: D ( cost: 25 via neighbor: B)
+E - New entry: A ( cost: 30 via neighbor: D)
+E - New entry: C ( cost: 28 via neighbor: D)B - New entry: E ( cost: 25 via neighbor: C)
+
+E - New entry: B ( cost: 29 via neighbor: D)B - New entry: D ( cost: 24 via neighbor: C)
+
+D - New entry: A ( cost: 31 via neighbor: E)
+D - New entry: C ( cost: 29 via neighbor: E)
+D - New entry: B ( cost: 30 via neighbor: E)
+B - New entry: E ( cost: 27 via neighbor: A)
+B - New entry: D ( cost: 26 via neighbor: A)
+E - New entry: A ( cost: 32 via neighbor: D)
+A - New entry: E ( cost: 28 via neighbor: B)
+E - New entry: C ( cost: 30 via neighbor: D)
+A - New entry: D ( cost: 27 via neighbor: B)C - New entry: E ( cost: 28 via neighbor: B)
+E - New entry: B ( cost: 31 via neighbor: D)
+
+C - New entry: D ( cost: 27 via neighbor: B)
+D - New entry: A ( cost: 33 via neighbor: E)
+D - New entry: C ( cost: 31 via neighbor: E)
+D - New entry: B ( cost: 32 via neighbor: E)
+B - New entry: E ( cost: 29 via neighbor: A)
+B - New entry: D ( cost: 28 via neighbor: A)
+E - New entry: A ( cost: 34 via neighbor: D)
+A - New entry: E ( cost: 30 via neighbor: B)
+E - New entry: C ( cost: 32 via neighbor: D)
+A - New entry: D ( cost: 29 via neighbor: B)
+E - New entry: B ( cost: 33 via neighbor: D)C - New entry: E ( cost: 30 via neighbor: B)
+
+C - New entry: D ( cost: 29 via neighbor: B)
+B - New entry: E ( cost: 29 via neighbor: C)
+D - New entry: A ( cost: 35 via neighbor: E)
+B - New entry: D ( cost: 28 via neighbor: C)
+D - New entry: C ( cost: 33 via neighbor: E)
+D - New entry: B ( cost: 34 via neighbor: E)
+E - New entry: A ( cost: 36 via neighbor: D)
+E - New entry: C ( cost: 34 via neighbor: D)
+E - New entry: B ( cost: 35 via neighbor: D)
+B - New entry: E ( cost: 31 via neighbor: A)
+B - New entry: D ( cost: 30 via neighbor: A)
+D - New entry: A ( cost: 37 via neighbor: E)
+D - New entry: C ( cost: 35 via neighbor: E)
+D - New entry: B ( cost: 36 via neighbor: E)
+A - New entry: E ( cost: 32 via neighbor: B)
+A - New entry: D ( cost: 31 via neighbor: B)
+C - New entry: E ( cost: 32 via neighbor: B)
+C - New entry: D ( cost: 31 via neighbor: B)
+E - New entry: A ( cost: 38 via neighbor: D)
+E - New entry: C ( cost: 36 via neighbor: D)
+E - New entry: B ( cost: 37 via neighbor: D)
+B - New entry: E ( cost: 31 via neighbor: C)
+B - New entry: D ( cost: 30 via neighbor: C)
+D - New entry: A ( cost: 39 via neighbor: E)
+D - New entry: C ( cost: 37 via neighbor: E)
+D - New entry: B ( cost: 38 via neighbor: E)
+B - New entry: E ( cost: 33 via neighbor: A)
+B - New entry: D ( cost: 32 via neighbor: A)
+E - New entry: A ( cost: 40 via neighbor: D)
+E - New entry: C ( cost: 38 via neighbor: D)
+E - New entry: B ( cost: 39 via neighbor: D)
+A - New entry: E ( cost: 34 via neighbor: B)
+A - New entry: D ( cost: 33 via neighbor: B)C - New entry: E ( cost: 34 via neighbor: B)
+
+C - New entry: D ( cost: 33 via neighbor: B)
+D - New entry: A ( cost: 41 via neighbor: E)
+D - New entry: C ( cost: 39 via neighbor: E)
+D - New entry: B ( cost: 40 via neighbor: E)
+B - New entry: E ( cost: 33 via neighbor: C)
+B - New entry: D ( cost: 32 via neighbor: C)
+E - New entry: A ( cost: 42 via neighbor: D)
+E - New entry: C ( cost: 40 via neighbor: D)
+E - New entry: B ( cost: 41 via neighbor: D)
+B - New entry: E ( cost: 35 via neighbor: A)
+D - New entry: A ( cost: 43 via neighbor: E)B - New entry: D ( cost: 34 via neighbor: A)
+
+D - New entry: C ( cost: 41 via neighbor: E)
+D - New entry: B ( cost: 42 via neighbor: E)
+A - New entry: E ( cost: 36 via neighbor: B)E - New entry: A ( cost: 44 via neighbor: D)
+
+C - New entry: E ( cost: 36 via neighbor: B)E - New entry: C ( cost: 42 via neighbor: D)A - New entry: D ( cost: 35 via neighbor: B)
+
+
+C - New entry: D ( cost: 35 via neighbor: B)
+E - New entry: B ( cost: 43 via neighbor: D)
+D - New entry: A ( cost: 45 via neighbor: E)
+B - New entry: E ( cost: 37 via neighbor: A)D - New entry: C ( cost: 43 via neighbor: E)
+
+B - New entry: D ( cost: 36 via neighbor: A)D - New entry: B ( cost: 44 via neighbor: E)
+
+E - New entry: A ( cost: 46 via neighbor: D)
+A - New entry: E ( cost: 38 via neighbor: B)
+E - New entry: C ( cost: 44 via neighbor: D)
+C - New entry: E ( cost: 38 via neighbor: B)A - New entry: D ( cost: 37 via neighbor: B)
+E - New entry: B ( cost: 45 via neighbor: D)
+
+C - New entry: D ( cost: 37 via neighbor: B)
+D - New entry: A ( cost: 47 via neighbor: E)
+D - New entry: C ( cost: 45 via neighbor: E)
+D - New entry: B ( cost: 46 via neighbor: E)
+B - New entry: E ( cost: 39 via neighbor: A)
+B - New entry: D ( cost: 38 via neighbor: A)
+E - New entry: A ( cost: 48 via neighbor: D)
+E - New entry: C ( cost: 46 via neighbor: D)A - New entry: E ( cost: 40 via neighbor: B)
+
+A - New entry: D ( cost: 39 via neighbor: B)E - New entry: B ( cost: 47 via neighbor: D)
+
+C - New entry: E ( cost: 40 via neighbor: B)
+C - New entry: D ( cost: 39 via neighbor: B)
+D - New entry: A ( cost: 49 via neighbor: E)B - New entry: E ( cost: 39 via neighbor: C)
+
+D - New entry: C ( cost: 47 via neighbor: E)B - New entry: D ( cost: 38 via neighbor: C)
+
+D - New entry: B ( cost: 48 via neighbor: E)
+E - New entry: A ( cost: 50 via neighbor: D)
+E - New entry: C ( cost: 48 via neighbor: D)
+E - New entry: B ( cost: 49 via neighbor: D)
+B - New entry: E ( cost: 41 via neighbor: A)
+B - New entry: D ( cost: 40 via neighbor: A)
+D - New entry: A ( cost: 51 via neighbor: E)
+D - New entry: C ( cost: 49 via neighbor: E)
+D - New entry: B ( cost: 50 via neighbor: E)
+A - New entry: E ( cost: 42 via neighbor: B)
+A - New entry: D ( cost: 41 via neighbor: B)
+C - New entry: E ( cost: 42 via neighbor: B)
+C - New entry: D ( cost: 41 via neighbor: B)
+E - New entry: A ( cost: 52 via neighbor: D)
+E - New entry: C ( cost: 50 via neighbor: D)
+E - New entry: B ( cost: 51 via neighbor: D)
+B - New entry: E ( cost: 41 via neighbor: C)
+B - New entry: D ( cost: 40 via neighbor: C)
+D - New entry: A ( cost: 53 via neighbor: E)
+D - New entry: C ( cost: 51 via neighbor: E)
+D - New entry: B ( cost: 52 via neighbor: E)
+B - New entry: E ( cost: 43 via neighbor: A)
+B - New entry: D ( cost: 42 via neighbor: A)
+E - New entry: A ( cost: 54 via neighbor: D)
+E - New entry: C ( cost: 52 via neighbor: D)
+E - New entry: B ( cost: 53 via neighbor: D)
+A - New entry: E ( cost: 44 via neighbor: B)
+A - New entry: D ( cost: 43 via neighbor: B)
+C - New entry: E ( cost: 44 via neighbor: B)
+C - New entry: D ( cost: 43 via neighbor: B)
+D - New entry: A ( cost: 55 via neighbor: E)
+B - New entry: E ( cost: 43 via neighbor: C)D - New entry: C ( cost: 53 via neighbor: E)
+
+B - New entry: D ( cost: 42 via neighbor: C)D - New entry: B ( cost: 54 via neighbor: E)
+
+E - New entry: A ( cost: 56 via neighbor: D)
+E - New entry: C ( cost: 54 via neighbor: D)
+E - New entry: B ( cost: 55 via neighbor: D)
+B - New entry: E ( cost: 45 via neighbor: A)
+B - New entry: D ( cost: 44 via neighbor: A)
+A - New entry: E ( cost: 46 via neighbor: B)D - New entry: A ( cost: 57 via neighbor: E)
+
+A - New entry: D ( cost: 45 via neighbor: B)
+D - New entry: C ( cost: 55 via neighbor: E)
+D - New entry: B ( cost: 56 via neighbor: E)
+C - New entry: E ( cost: 46 via neighbor: B)
+C - New entry: D ( cost: 45 via neighbor: B)
+B - New entry: E ( cost: 45 via neighbor: C)E - New entry: A ( cost: 58 via neighbor: D)
+
+E - New entry: C ( cost: 56 via neighbor: D)B - New entry: D ( cost: 44 via neighbor: C)
+
+E - New entry: B ( cost: 57 via neighbor: D)
+D - New entry: A ( cost: 59 via neighbor: E)
+D - New entry: C ( cost: 57 via neighbor: E)
+B - New entry: E ( cost: 47 via neighbor: A)D - New entry: B ( cost: 58 via neighbor: E)
+
+B - New entry: D ( cost: 46 via neighbor: A)
+E - New entry: A ( cost: 60 via neighbor: D)
+A - New entry: E ( cost: 48 via neighbor: B)
+E - New entry: C ( cost: 58 via neighbor: D)
+C - New entry: E ( cost: 48 via neighbor: B)A - New entry: D ( cost: 47 via neighbor: B)E - New entry: B ( cost: 59 via neighbor: D)
+
+
+C - New entry: D ( cost: 47 via neighbor: B)
+B - New entry: E ( cost: 49 via neighbor: A)D - New entry: A ( cost: 61 via neighbor: E)
+
+B - New entry: D ( cost: 48 via neighbor: A)
+D - New entry: C ( cost: 59 via neighbor: E)
+D - New entry: B ( cost: 60 via neighbor: E)
+A - New entry: E ( cost: 50 via neighbor: B)
+A - New entry: D ( cost: 49 via neighbor: B)
+E - New entry: A ( cost: 62 via neighbor: D)C - New entry: E ( cost: 50 via neighbor: B)
+
+C - New entry: D ( cost: 49 via neighbor: B)
+E - New entry: C ( cost: 60 via neighbor: D)
+E - New entry: B ( cost: 61 via neighbor: D)
+B - New entry: E ( cost: 49 via neighbor: C)
+B - New entry: D ( cost: 48 via neighbor: C)
+D - New entry: A ( cost: 63 via neighbor: E)
+D - New entry: C ( cost: 61 via neighbor: E)
+D - New entry: B ( cost: 62 via neighbor: E)
+B - New entry: E ( cost: 51 via neighbor: A)
+B - New entry: D ( cost: 50 via neighbor: A)
+E - New entry: A ( cost: 64 via neighbor: None)
+E - New entry: C ( cost: 62 via neighbor: D)
+E - New entry: B ( cost: 63 via neighbor: D)
+A - New entry: E ( cost: 52 via neighbor: B)
+A - New entry: D ( cost: 51 via neighbor: B)
+C - New entry: E ( cost: 52 via neighbor: B)
+C - New entry: D ( cost: 51 via neighbor: B)
+D - New entry: A ( cost: 64 via neighbor: None)
+D - New entry: C ( cost: 63 via neighbor: E)
+D - New entry: B ( cost: 64 via neighbor: None)
+B - New entry: E ( cost: 51 via neighbor: C)
+B - New entry: D ( cost: 50 via neighbor: C)
+E - New entry: C ( cost: 64 via neighbor: None)
+E - New entry: B ( cost: 64 via neighbor: None)
+B - New entry: E ( cost: 53 via neighbor: A)
+B - New entry: D ( cost: 52 via neighbor: A)
+D - New entry: C ( cost: 64 via neighbor: None)
+A - New entry: E ( cost: 54 via neighbor: B)
+A - New entry: D ( cost: 53 via neighbor: B)
+C - New entry: E ( cost: 54 via neighbor: B)
+C - New entry: D ( cost: 53 via neighbor: B)
+B - New entry: E ( cost: 53 via neighbor: C)
+B - New entry: D ( cost: 52 via neighbor: C)
+B - New entry: E ( cost: 55 via neighbor: A)
+B - New entry: D ( cost: 54 via neighbor: A)
+A - New entry: E ( cost: 56 via neighbor: B)
+A - New entry: D ( cost: 55 via neighbor: B)
+C - New entry: E ( cost: 56 via neighbor: B)
+C - New entry: D ( cost: 55 via neighbor: B)
+B - New entry: E ( cost: 55 via neighbor: C)
+B - New entry: D ( cost: 54 via neighbor: C)
+B - New entry: E ( cost: 57 via neighbor: A)
+B - New entry: D ( cost: 56 via neighbor: A)
+A - New entry: E ( cost: 58 via neighbor: B)
+A - New entry: D ( cost: 57 via neighbor: B)
+C - New entry: E ( cost: 58 via neighbor: B)
+C - New entry: D ( cost: 57 via neighbor: B)
+B - New entry: E ( cost: 57 via neighbor: C)
+B - New entry: D ( cost: 56 via neighbor: C)
+B - New entry: E ( cost: 59 via neighbor: A)
+B - New entry: D ( cost: 58 via neighbor: A)
+A - New entry: E ( cost: 60 via neighbor: B)
+A - New entry: D ( cost: 59 via neighbor: B)
+C - New entry: E ( cost: 60 via neighbor: B)
+C - New entry: D ( cost: 59 via neighbor: B)
+B - New entry: E ( cost: 59 via neighbor: C)
+B - New entry: D ( cost: 58 via neighbor: C)
+B - New entry: E ( cost: 61 via neighbor: A)
+B - New entry: D ( cost: 60 via neighbor: A)
+A - New entry: E ( cost: 62 via neighbor: B)
+A - New entry: D ( cost: 61 via neighbor: B)
+C - New entry: E ( cost: 62 via neighbor: B)
+C - New entry: D ( cost: 61 via neighbor: B)
+B - New entry: E ( cost: 61 via neighbor: C)
+B - New entry: D ( cost: 60 via neighbor: C)
+B - New entry: E ( cost: 63 via neighbor: A)
+B - New entry: D ( cost: 62 via neighbor: A)
+A - New entry: E ( cost: 64 via neighbor: None)
+A - New entry: D ( cost: 63 via neighbor: B)
+C - New entry: E ( cost: 64 via neighbor: None)
+C - New entry: D ( cost: 63 via neighbor: B)
+B - New entry: E ( cost: 63 via neighbor: C)
+B - New entry: D ( cost: 62 via neighbor: C)
+B - New entry: E ( cost: 64 via neighbor: None)
+B - New entry: D ( cost: 64 via neighbor: None)
+A - New entry: D ( cost: 64 via neighbor: None)
+C - New entry: D ( cost: 64 via neighbor: None)
+B - timeout: 1479262054.163
+A - timeout: 1479262054.163
+C - timeout: 1479262054.163
+D - timeout: 1479262054.164
+E - timeout: 1479262054.164
+
+*********************************************************
+
+*************5. cti with poisonReverse changelink where AE and CD change to 64**************************
+
+A - New entry: C ( cost: 2 via neighbor: B)
+B - timeout: 1479262272.476
+C - New entry: A ( cost: 2 via neighbor: B)
+B - New entry: E ( cost: 2 via neighbor: A)
+E - New entry: C ( cost: 3 via neighbor: A)
+E - New entry: B ( cost: 2 via neighbor: A)
+A - timeout: 1479262272.477
+D - New entry: A ( cost: 3 via neighbor: C)
+D - New entry: B ( cost: 2 via neighbor: C)
+C - New entry: E ( cost: 3 via neighbor: B)
+B - New entry: D ( cost: 2 via neighbor: C)
+A - New entry: D ( cost: 2 via neighbor: E)
+D - New entry: A ( cost: 2 via neighbor: E)
+C - New entry: E ( cost: 2 via neighbor: D)
+E - timeout: 1479262272.478
+E - New entry: C ( cost: 2 via neighbor: D)
+C - timeout: 1479262272.487
+D - timeout: 1479262272.487
+A - New entry: E ( cost: 64 via neighbor: None)
+A - New entry: D ( cost: 3 via neighbor: B)
+E - New entry: A ( cost: 64 via neighbor: None)
+E - New entry: B ( cost: 3 via neighbor: D)
+D - New entry: A ( cost: 3 via neighbor: C)
+B - New entry: E ( cost: 3 via neighbor: C)
+A - New entry: E ( cost: 4 via neighbor: B)
+E - New entry: A ( cost: 4 via neighbor: D)
+B - timeout: 1479262282.479
+A - timeout: 1479262282.480
+E - timeout: 1479262282.481
+C - timeout: 1479262282.488
+D - timeout: 1479262282.488
+C - New entry: E ( cost: 64 via neighbor: None)
+C - New entry: D ( cost: 64 via neighbor: None)
+D - New entry: A ( cost: 64 via neighbor: None)
+D - New entry: C ( cost: 64 via neighbor: None)
+D - New entry: B ( cost: 64 via neighbor: None)
+E - New entry: A ( cost: 64 via neighbor: None)
+B - New entry: E ( cost: 64 via neighbor: None)
+E - New entry: C ( cost: 64 via neighbor: None)
+E - New entry: B ( cost: 64 via neighbor: None)
+B - New entry: D ( cost: 64 via neighbor: None)
+A - New entry: E ( cost: 64 via neighbor: None)
+A - New entry: D ( cost: 64 via neighbor: None)
+
+***********************************************************************

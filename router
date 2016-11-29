@@ -1,0 +1,414 @@
+#!/usr/bin/python
+import readrouters
+import socket
+from copy import deepcopy
+
+#macros
+#DEBUG = True
+DEBUG = False
+
+INF = 64
+
+class Router:
+    def __init__(self, routerName, testDir, poisonedReverse=False):
+
+        #get data of this router
+        routerList = readrouters.readrouters(testdir)
+        directLinks = readrouters.readlinks(testdir, routername)
+        routerInfo = routerList[routerName]
+
+        self.host = routerInfo.host
+        self.routerName = routerName
+        self.poisonedReverse = poisonedReverse
+
+        self.neighborInfo = {} #holds our neighbors socket info for UDP connections
+        self.routingTable = {} #this will have all of this node's distance vectors (itself, and neighbor's)
+        self.routingTable[self.routerName] = {}
+        self.socks = {}
+        self.forwardingTable = {}
+
+        #create socket for command port
+        #we recvfrom() update messages on this port as well as send update messages
+        self.commandSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
+        self.commandSock.bind(( routerInfo.host, routerInfo.commandport ))
+        self.socks["command"] = self.commandSock
+
+        #create socket for update port
+        #we recvfrom() update messages on this port as well as send update messages
+        self.updateSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  
+        self.updateSock.bind(( routerInfo.host, routerInfo.updateport ))
+        self.socks["update"] = self.updateSock
+
+        # our direct neigbors in {} form as well as
+        #establish the neighbors it's connected to in routingTable
+        for key, value in directLinks.iteritems(): #key is name, value is link cost
+            self.routingTable[routerName][key] = self.Entry(value.cost, key)
+
+            #we use this for UDP connections later
+            self.neighborInfo[key] = routerList[key]
+
+            #initialize neighbor distance vectors (we haven't recv'd their DV's yet)
+            self.routingTable[key] = {}
+
+        #put itself in as distance 0
+        self.routingTable[routerName][routerName] = self.Entry(0, routerName)
+
+        #put non-neigbor nodes in
+        for key in routerList.keys():
+            if key not in self.routingTable[routerName]:
+               self.routingTable[routerName][key] = self.Entry(INF, None)
+
+            for name in self.routingTable.keys():
+                if name != routerName:
+                    #entries use itself as hop because this node's own DV can use it later
+                    self.routingTable[name][key] = self.Entry(INF, None) 
+                
+
+        #initialize the values of the neighbor that we do know.
+        for name in self.routingTable.keys():
+            self.routingTable[name][name] = self.Entry(0, name)
+            self.routingTable[name][self.routerName] = self.Entry(self.routingTable[self.routerName][name].cost,name)
+
+        #initialize this router's forwarding table. in form [Destination][which router to use for next hop]
+        for dest in routerList.keys():
+            if dest != self.routerName:
+                if dest in self.routingTable.keys():
+                    self.forwardingTable[dest] = dest
+                else:
+                    self.forwardingTable[dest] = None
+
+    class Entry:
+        def __init__(self, cost, hop):
+            self.cost = cost
+            self.hop = hop
+ 
+    def __getUpdateMsg(self, distanceVector):
+        msg = "U"
+
+        for key, value in distanceVector.iteritems():
+            msg += " " + key + " " + str(value.cost)
+
+        return msg
+
+    # send U to router with name <routerName>
+    def sendUpdate(self, routerName): 
+        distanceVector = self.routingTable[self.routerName]
+        if self.poisonedReverse:
+            distanceVector = deepcopy(distanceVector)
+            for dest in distanceVector.keys():
+                if dest != self.routerName and dest != routerName: #don't include ourselves or the direct link neighbor
+                    #if to go to dest we have to hop through routerName, then make a white lie about that distance
+                    #being infinity
+                    if self.forwardingTable[dest] == routerName:
+                        #print "In router %s, to get to %s we use: %s, so lie." % (self.routerName, dest, routerName)
+                        distanceVector[dest] = self.Entry(INF, None)
+
+        msg = self.__getUpdateMsg(distanceVector)
+        if DEBUG:
+            print "%s sent VC to %s." % (self.routerName, routerName)
+        self.updateSock.sendto(msg, (self.neighborInfo[routerName].host,
+            self.neighborInfo[routerName].updateport))
+
+    #send U to all neighbors using our forwarding table
+    def sendUpdateToAll(self):
+        #ready to send msg to all neighbors    
+        #get rid of duplicate hops so to only send 1 message for 
+        #updating our vector which will then propogate.
+        for hop in list(set(self.forwardingTable.values())):
+            if hop != None and hop in self.neighborInfo.keys():
+                self.sendUpdate(hop)
+
+        '''for neighbor in self.routingTable.keys():
+            if neighbor != self.routerName:
+                self.sendUpdate(neighbor)'''
+
+    #primarily for seeing which way to send your distance vector to your direct-link neighbors than updating based on results
+    #essentially: "Change your neighbors as needed"
+    def initForwardingTable(self, msgSender):
+
+        #first loop and fix routing for msgSender
+        for neighborName in self.neighborInfo.keys():
+
+            hop = self.forwardingTable[neighborName] #our current neighbor hop for which we use to get to his neighborName
+            newCost = self.routingTable[msgSender][self.routerName].cost + self.routingTable[msgSender][neighborName].cost
+            directCost = self.routingTable[neighborName][self.routerName].cost
+
+            if hop == None: #this can potentially be a new way to get to our broken link neighbor.
+                if newCost < directCost:
+                    self.forwardingTable[neighborName] = msgSender   
+                elif directCost < INF:
+                    self.forwardingTable[neighborName] = neighborName
+                #elif newCost >= INF:
+                #    continue
+            elif msgSender == hop: #if it's 
+                #change no matter what. 
+                if newCost >= INF:
+                    self.forwardingTable[neighborName] = None
+                else:
+                    self.forwardingTable[neighborName] = msgSender
+            else:
+                currentCost = self.routingTable[hop][self.routerName].cost + self.routingTable[hop][neighborName].cost
+
+                if newCost < currentCost:
+                    self.forwardingTable[neighborName] = msgSender
+                elif directCost < newCost and directCost < INF:
+                    self.forwardingTable[neighborName] = neighborName
+
+    #this is for forwarding to your neighbors for your neighbors
+    '''def initForwardingTable(self):
+
+        for neighborName in self.neighborInfo.keys():
+            entries = []
+            for otherNeighborName in self.neighborInfo.keys():
+                cost = self.routingTable[otherNeighborName][self.routerName].cost + self.routingTable[otherNeighborName][neighborName].cost
+                newEntry = (cost, pathTo)
+
+                entries.append(newEntry)
+
+            minEntry = min(entries, key = lambda entry: entry[0])
+            if minEntry[0] >= INF:
+                self.forwardingTable[neighborName] = None
+            else:
+                self.forwardingTable[neighborName] = minEntry[1]'''
+
+
+
+
+    def DistanceVectorAlgorithm(self, msgSender): 
+        triggered = False
+        self.initForwardingTable(msgSender)
+        #update this router's distance vector
+        for dest in self.routingTable[self.routerName].keys(): 
+
+            if dest == self.routerName: #we don't want to get to ourselves.
+                continue
+
+            oldEntry = self.routingTable[self.routerName][dest]
+            entries = []
+            #get a list of Entry()s with costs to dest from all of this node's DVs, don't include 0 costs because those are to itself.
+            for neighborName in self.neighborInfo.keys():  
+                hop = self.forwardingTable[neighborName] #neighborName may not be fastest way to get to neighbor so use forwardingTable
+                if hop != None: #we only want our neighbor's distance vectors
+                    #c(x,v) + Dv(y)
+
+                    #update forwarding table to adjust to adding or losing direct neighbors
+                    '''directCost = self.routingTable[neighborName][self.routerName].cost
+                    indirectCost = self.routingTable[hop][self.routerName].cost + self.routingTable[hop][neighborName].cost
+                    if directCost <= indirectCost:
+                        self.forwardingTable[neighborName] = neighborName
+                        hop = neighborName'''
+
+                    offset = self.routingTable[hop][dest].cost
+
+                    actualCost =  self.routingTable[hop][self.routerName].cost + offset
+                    newEntry = self.Entry(actualCost, hop)
+
+                    #this if statement is for min's functionality, i.e if we have an unchanged entry E to C with cost 9 through hop A,
+                    #and it finds a new entry of the same cost through hop B now, the min will return what is the same already.
+                    if actualCost == oldEntry.cost and hop == oldEntry.hop:
+                        entries.insert(0, newEntry) 
+                    else:
+                        entries.append(newEntry)
+                
+            #in case node is cut off from dest path
+            if len(entries) == 0:
+               minEntry = self.Entry(INF, None) 
+            else:
+                minEntry = min(entries, key = lambda entry: entry.cost)
+
+            if minEntry.cost >= INF: #distance is infinity, no new entry added unless previous cost wasn't infinity
+                self.routingTable[self.routerName][dest] = self.Entry(INF, None)
+                self.forwardingTable[dest] = None #update our forwarding table, telling us this is shortest path to send packets
+                if oldEntry.cost < INF:
+                    print "%s - New entry: %s ( cost: %d via neighbor: %s)" % (self.routerName, dest, self.routingTable[self.routerName][dest].cost,
+                            "None")
+
+                    triggered = True
+                continue
+            self.forwardingTable[dest] = minEntry.hop #update our forwarding table, telling us this is shortest path to send packets
+
+            #make sure it's not just the same exact one
+            if not(oldEntry.cost == minEntry.cost and oldEntry.hop == minEntry.hop):
+                #find least cost to this neighbor and put it in forwarding table
+
+                self.routingTable[self.routerName][dest] = minEntry #set our DV's entry to the min of all of these costs
+                self.forwardingTable[dest] = minEntry.hop #update our forwarding table, telling us this is shortest path to send packets
+ 
+                print "%s - New entry: %s ( cost: %d via neighbor: %s)" % (self.routerName, dest, self.routingTable[self.routerName][dest].cost,
+                        self.routingTable[self.routerName][dest].hop)
+                triggered = True
+
+        return triggered
+
+    def linkCost(self, neighborName, cost): 
+        if DEBUG:
+            print "%s detected link change from it to %s" % (self.routerName, neighborName)
+        #update own distance vectors for this direct link and send it off to our neighbors
+        hop = neighborName
+        #account for broken link aka INF
+        if cost >= INF:
+            self.forwardingTable[neighborName] = None
+            hop = None
+        updatedEntry = self.Entry(int(cost), hop)
+        self.routingTable[neighborName][self.routerName] = updatedEntry
+
+        #self.initForwardingTable(neighborName)
+        self.DistanceVectorAlgorithm(neighborName)
+        self.sendUpdateToAll()
+
+    def printNeighborTable(self):
+        s = ""
+        for k in self.routingTable.keys():
+            if k != self.routerName:
+                s += self.__printNeighborTable(k)
+        return s
+
+    def __printNeighborTable(self, neighborName):
+        s = "\n\n******" + self.routerName + "'s neighbor's DISTANCE VECTOR:" + neighborName + "******\n"
+        s += "Dest\tCost\tHop\n"
+
+        for dest, entry in self.routingTable[neighborName].iteritems():
+            hop = entry.hop
+            if hop is None:
+                hop = "None"
+            s += " " + dest + "\t " + str(entry.cost) + "\t " + hop + "\n"
+
+
+        s += "***********************\n\n"
+        return s
+
+    def printTable(self, destName=""):
+        s = "\n\n******" + self.routerName + "'s DISTANCE VECTOR******\n"
+        s += "Dest\tCost\tHop\n"
+
+        if len(destName) == 0:
+
+            for dest, entry in sorted(self.routingTable[self.routerName].iteritems()):
+                hop = entry.hop
+                if hop is None:
+                    hop = "None"
+                s += " " + dest + "\t " + str(entry.cost) + "\t " + hop + "\n"
+
+        elif destName in self.routingTable[self.routerName].keys():
+                entry = self.routingTable[self.routerName][destName]
+                hop = entry.hop
+                if hop is None:
+                    hop = "None"
+                s += " " + destName + "\t " + str(entry.cost) + "\t " + hop + "\n"
+
+        s += "***********************\n\n"
+        if DEBUG:
+            s += self.printForwardingTable()
+            s += self.printNeighborTable()
+        print s
+
+    def printForwardingTable(self):
+        s = "\n\n******" + self.routerName + "'s FORWARDING table******\n"
+        s += "Dest\tHop\n"
+        for dest, hop in self.forwardingTable.iteritems():
+            if hop is None:
+                hop = "None"
+            s += " " + dest + "\t " + hop  + "\n"
+        s += "***********************\n\n"
+        return s
+
+
+    #parse the U protocol message and put it into a Distance Vector form
+    def parseUpdateMsg(self, neighborName, content):
+        L = content.split(" ")
+
+        #update your neighbor distance vectors in accordance to your forwarding table.
+
+        #update our neighbor's distance vector, no hop information, but need this form to use min(params, key=) later
+        self.routingTable[neighborName] = {L[i]:self.Entry(int(L[i+1]),neighborName) for i in range(0, len(L) - 1, 2)} 
+
+        if DEBUG:
+            print "%s received %s's DV: %s" % (self.routerName, neighborName, {k:(v.cost, v.hop) for k, v in self.routingTable[neighborName].iteritems()})
+
+        #if current forwarding table is more than this sending neighbor, change
+        #curr = self.forwardingTable[neighborName]
+        #if curr != neighborName:
+            #if self.routingTable[curr][neighborName].cost + self.routingTable[curr][self.routingName] >= self.routingTable[neighborName][self.routingName].cost:
+        #self.forwardingTable[neighborName] = neighborName #if a neighbor was able to directly send a msg, this router can hop directly to neighborName
+
+if __name__=='__main__':
+    from sys import argv #for command line arguments
+    from select import select #select call
+    from time import time #time in seconds since the eopch as a floating point number
+    
+    argvoffset = 0
+    poisonedReverse = False
+
+    if argv[1] == "-p":
+        argvoffset = 1
+        poisonedReverse = True
+
+    testdir = argv[1 + argvoffset]
+    routername = argv[2 + argvoffset]
+
+    #initialize that router with that data
+    router = Router(routername, testdir, poisonedReverse)
+    routerList = readrouters.readrouters(testdir)
+    
+    rlist = router.socks.values()
+
+    totalTimePassed = 0
+    start = time()
+
+    #select pattern
+    while 1:
+       
+        #select.select works with socket.socket objects because it calls method socket.fileno()
+        #readySocks is the subset of the first parameter in select, called: rlist, these are the sockets
+        #ready to be read from
+        readySocks, _, _ = select(rlist, [], [], 10 - totalTimePassed) #10 second timeout or if socket is ready to read from
+
+        for sock in readySocks:
+
+
+            #first find which Router the msg came from
+            msg, (host, port) = sock.recvfrom(1024)
+
+            #if we did recv from and 10 seconds has not passed
+            if msg and totalTimePassed < 10:
+
+                protocol = ""
+                content = ""
+                if(len(msg) > 1):
+                    protocol, content = msg.split(" ", 1)
+                else:
+                    protocol = msg 
+                    content = ""
+                 
+                if protocol == 'U': 
+                    neighborName = [key for key in routerList.keys()
+                            if (routerList[key].host == host
+                                or ( host == '127.0.0.1' and routerList[key].host == 'localhost') 
+                                or ( host == 'localhost' and routerList[key].host == '127.0.0.1'))
+                                and routerList[key].updateport == port][0]
+
+                    distanceVector = router.parseUpdateMsg(neighborName, content)
+                    #router.initForwardingTable(neighborName)
+                    triggered = router.DistanceVectorAlgorithm(neighborName)
+                    if triggered:
+                        router.sendUpdateToAll()
+
+                elif protocol == 'L':
+                    contentSplit = content.split(" ")
+                    router.linkCost(contentSplit[0], contentSplit[1])
+
+                elif protocol == 'P':
+                    router.printTable(content)
+             
+
+        #stop your watch and see if 10 seconds have passed
+        totalTimePassed = time() - start
+
+        if totalTimePassed >= 10:
+            #send update
+            router.sendUpdateToAll()
+            print "%s - timeout: %0.3f" % (routername, time())
+            start = time() #start new stop watch.
+            totalTimePassed = 0
+            #select([], [], [], 10 - totalTimePassed) # 'sleeps' 10 - x seconds
+
